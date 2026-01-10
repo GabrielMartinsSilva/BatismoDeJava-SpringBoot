@@ -4,12 +4,17 @@ package dev.java.CadastroDeNinjas.Missoes;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("missoes")
+@RequestMapping("/missoes")
 public class MissoesController {
 
     @GetMapping("/listar")
     public String missao() {
         return "Pagina de missoes !";
+    }
+
+    @GetMapping("/listarID")
+    public String missao() {
+        return "Pagina de missoes por id !";
     }
 
     @PostMapping("/criar")
