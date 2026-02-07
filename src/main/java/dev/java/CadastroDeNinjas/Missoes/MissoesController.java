@@ -13,7 +13,7 @@ public class MissoesController {
     }
 
     @GetMapping("/listarID")
-    public String missao() {
+    public String listaridMissao() {
         return "Pagina de missoes por id !";
     }
 
