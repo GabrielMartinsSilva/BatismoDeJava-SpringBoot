@@ -29,6 +29,9 @@ public class NinjaModel {
     @Column(name = "idade")
     private int idade;
 
+    @Column(name = "img_url")
+    private String img_url;
+
     @JoinColumn (name = "missoes_id" )
     @ManyToOne
     private MissoesModel missoes;
