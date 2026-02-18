@@ -55,7 +55,7 @@ public class NinjaController {
     public ResponseEntity<String> alterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninjaAtualizado) {
         if(ninjaService.listarNinjasID(id) != null) {
             NinjaDTO ninjaNovo = ninjaService.atualizarNinja(id, ninjaAtualizado);
-            return ResponseEntity.status(HttpStatus.CREATED)
+            return ResponseEntity.status(HttpStatus.OK)
                     .body("O ninja " + ninjaNovo.getNome() + " foi atualizado com sucesso !");
 
         } else {
