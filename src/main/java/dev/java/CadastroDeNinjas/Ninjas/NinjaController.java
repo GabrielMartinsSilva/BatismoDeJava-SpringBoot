@@ -1,5 +1,9 @@
 package dev.java.CadastroDeNinjas.Ninjas;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,13 @@ public class NinjaController {
 
     // Adicionar ninja
     @PostMapping("/criar")
+    @Operation(summary = "Cria um novo ninja", description ="Rota cria um novo ninja")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Ninja criado com sucesso "),
+            @ApiResponse(responseCode = "400", description = "Erro na criação do ninja ")
+
+    })
+
     public ResponseEntity<String> criarNinja(@RequestBody NinjaDTO ninjaDTO) {
 
         NinjaDTO ninjaNovo = ninjaService.criarNinja(ninjaDTO);
@@ -52,7 +63,17 @@ public class NinjaController {
 
     // Alterar dados dos ninjas
     @PutMapping("/alterar/{id}")
-    public ResponseEntity<String> alterarNinja(@PathVariable Long id, @RequestBody NinjaDTO ninjaAtualizado) {
+    @Operation(summary = "Altera o ninja por id", description ="Rota cria um novo ninja")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ninja alterado com sucesso "),
+            @ApiResponse(responseCode = "404", description = "Ninja não encontrado")
+    })
+
+    public ResponseEntity<String> alterarNinja(
+            @Parameter(description = "Usuario envia ID no path da requisição")
+            @PathVariable Long id,
+            @Parameter(description = "Usuario envia dados do ninja no corpo da requisição")
+            @RequestBody NinjaDTO ninjaAtualizado) {
         if(ninjaService.listarNinjasID(id) != null) {
             NinjaDTO ninjaNovo = ninjaService.atualizarNinja(id, ninjaAtualizado);
             return ResponseEntity.status(HttpStatus.OK)
